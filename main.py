@@ -26,6 +26,7 @@ bot = Bot(token=bot_token)
 dp = Dispatcher(bot, storage=MemoryStorage())
 admin_states = {}
 user_states = {}
+
 @dp.message_handler(Text(equals="Цены"))
 async def handle_prices(message: types.Message):
     # Здесь можно добавить логику для обработки кнопки "Цены"
@@ -117,16 +118,6 @@ async def handle_message(message: types.Message):
 @dp.callback_query_handler(lambda callback_query: callback_query.data == 'admin_contact')
 async def handle_admin_contact(callback_query: types.CallbackQuery):
     admin_chat_id = 'yatakoikirill'
-    await bot.send_message(callback_query.from_user.id, f"Администратор: @{admin_chat_id}")
-
-if __name__ == '__main__':
-    from aiogram import executor
-
-    executor.start_polling(dp, skip_updates=True)
-
-@dp.callback_query_handler(lambda callback_query: callback_query.data == 'admin_contact')
-async def handle_admin_contact(callback_query: types.CallbackQuery):
-    admin_chat_id = 'ADMIN_CHAT_ID'
     await bot.send_message(callback_query.from_user.id, f"Администратор: @{admin_chat_id}")
 
 if __name__ == '__main__':
